@@ -1,16 +1,20 @@
-# Usas una imagen de Node.js como base
-FROM node:latest
-# Crear carpeta para la aplicación
-WORKDIR /usr/src/app
-# Instalar dependencias
-# Se usa un comodín para garantizar que ambos package.json Y packagelock.json sean copiados
+# Usa una imagen base de Node.js
+FROM node:16
+
+# Define el directorio de trabajo dentro del contenedor
+WORKDIR /app
+
+# Copia los archivos package.json y package-lock.json para instalar las dependencias
 COPY package*.json ./
+
+# Instala las dependencias de la aplicación
 RUN npm install
-# Si se está construyendo para ambiente de producción
-# RUN npm ci --only=production
-# copiar el código fuente de la aplicación completo
+
+# Copia el resto de los archivos de tu aplicación al contenedor
 COPY . .
-#Exponer el Puerto donde correrá la aplicación
+
+# Expón el puerto en el que la app estará escuchando (ajústalo si es necesario)
 EXPOSE 3000
-#Comando para ejecutar la aplicación
-CMD [ "node", "app.js" ]
+
+# Comando para ejecutar la aplicación
+CMD ["node", "app.js"]
