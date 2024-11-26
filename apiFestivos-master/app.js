@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 
 const { conectarDB } = require('./repository/bdRepository');
-// Conectar a la base de datos
+// Conectar a la base de datoss
 conectarDB();
 
 const festivoRutas = require('./routes/festivosRoutes');
